@@ -7,5 +7,6 @@ export interface IUserType {
   user_type: "admin" | "user";
   isVerifyed: boolean;
   googleId: string;
+  address: string;
   provider: "local" | "google"; // ✅ Track login method
 }

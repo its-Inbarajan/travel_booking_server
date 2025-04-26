@@ -18,3 +18,7 @@ export function generateOTP() {
   const otp = Math.floor(Math.random() * (max - min + 1)) + min;
   return otp.toString();
 }
+
+export const catchAsync = (fn: Function) => (req: any, res: any, next: any) => {
+  Promise.resolve(fn(req, res, next)).catch(next);
+};
