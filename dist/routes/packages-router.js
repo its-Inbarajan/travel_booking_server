@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const packages_controller_1 = require("../controllers/packages-controller");
+const packageRouter = (0, express_1.Router)();
+packageRouter.post("/createPackage", packages_controller_1.createPackage);
+packageRouter.get("/getPackages", packages_controller_1.getPackages);
+packageRouter.put("/updatePackage/:id", packages_controller_1.updatePackage);
+packageRouter.delete("/deletePackages/:id", packages_controller_1.deletePackages);
+packageRouter.get("/getById/:id", packages_controller_1.getPackage);
+exports.default = packageRouter;
