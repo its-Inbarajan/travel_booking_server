@@ -1,8 +1,10 @@
 import dot from "dotenv";
-import express, { Request, Response } from "express";
+import express from "express";
 import mongoose from "mongoose";
 import cookieparser from "cookie-parser";
 import cors from "cors";
+import userRouter from "./routes/user-roter";
+import otpsRouter from "./routes/otp-roter";
 
 // Config
 dot.config();
@@ -19,9 +21,13 @@ app.use(
   })
 );
 
-app.use("/", (req: Request, res: Response) => {
-  res.send("Welcome developer! your server is Perfectly running.");
-});
+// app.use("/api", (req: Request, res: Response) => {
+//   res.send("Welcome developer! your server is Perfectly running.");
+// });
+
+// apis
+app.use("/api/v1/users", userRouter);
+app.use("/api/v1/otps", otpsRouter);
 
 mongoose
   .connect(process.env.MONGODB_URL! as string)
