@@ -5,6 +5,8 @@ import cookieparser from "cookie-parser";
 import cors from "cors";
 import userRouter from "./routes/user-roter";
 import otpsRouter from "./routes/otp-roter";
+import packageRouter from "./routes/packages-router";
+import bookingRouter from "./routes/booking-router";
 
 // Config
 dot.config();
@@ -28,6 +30,8 @@ app.use(
 // apis
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/otps", otpsRouter);
+app.use("/api/v1/package", packageRouter);
+app.use("/api/v1/bookings", bookingRouter);
 
 mongoose
   .connect(process.env.MONGODB_URL! as string)

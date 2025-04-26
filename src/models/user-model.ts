@@ -39,8 +39,12 @@ const User_schema = new Schema<IUserType>(
       enum: ["local", "google"],
       default: "local",
     },
+    address: {
+      type: String,
+      default: "",
+    },
   },
   { timestamps: true }
 );
 
-export const USERMODEL = mongoose.model<IUserType>("User", User_schema);
+export const USERMODEL = mongoose.model<IUserType>("user", User_schema);
