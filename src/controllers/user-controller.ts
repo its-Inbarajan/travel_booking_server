@@ -74,11 +74,12 @@ export async function createUser(
           subject: "Please verify your account by using otp",
           text: `Please find the opt, reminder don't share with anyone ${otp}`,
         })
-        .then(() => res.status(result.statuscode).json(result))
+        // .then(() => )
         .catch((err) => {
           next(err);
         });
     }
+    res.status(result.statuscode).json(result);
   } catch (error) {
     next(error);
   }
@@ -106,11 +107,25 @@ export async function login(req: Request, res: Response, next: NextFunction) {
       },
     });
 
-    const responses: IApiResponse<IUserType> = {
+    const user = {
+      email: find_user?.email ?? "",
+      user_type: find_user?.user_type ?? "",
+      userId: find_user?._id ?? "",
+      user_name: find_user?.user_name ?? "",
+      profile: find_user.profile ?? "",
+    };
+
+    const responses: IApiResponse<{
+      email: string;
+      user_type: string;
+      userId: string;
+      user_name: string;
+      profile: string;
+    }> = {
       message: `Welcome ${find_user.user_name ?? ""}`,
       statuscode: 200,
       success: true,
-      responses: find_user,
+      responses: user,
     };
 
     // Store token in HTTP-Only cookie

@@ -12,6 +12,7 @@ const user_roter_1 = __importDefault(require("./routes/user-roter"));
 const otp_roter_1 = __importDefault(require("./routes/otp-roter"));
 const packages_router_1 = __importDefault(require("./routes/packages-router"));
 const booking_router_1 = __importDefault(require("./routes/booking-router"));
+const global_error_1 = require("./middleware/global-error");
 // Config
 dotenv_1.default.config();
 const app = (0, express_1.default)();
@@ -26,6 +27,8 @@ app.use((0, cors_1.default)({
 // app.use("/api", (req: Request, res: Response) => {
 //   res.send("Welcome developer! your server is Perfectly running.");
 // });
+// Global error handler
+app.use(global_error_1.GlobalError);
 // apis
 app.use("/api/v1/users", user_roter_1.default);
 app.use("/api/v1/otps", otp_roter_1.default);

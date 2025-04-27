@@ -7,6 +7,7 @@ import userRouter from "./routes/user-roter";
 import otpsRouter from "./routes/otp-roter";
 import packageRouter from "./routes/packages-router";
 import bookingRouter from "./routes/booking-router";
+import { GlobalError } from "./middleware/global-error";
 
 // Config
 dot.config();
@@ -26,6 +27,9 @@ app.use(
 // app.use("/api", (req: Request, res: Response) => {
 //   res.send("Welcome developer! your server is Perfectly running.");
 // });
+
+// Global error handler
+app.use(GlobalError);
 
 // apis
 app.use("/api/v1/users", userRouter);

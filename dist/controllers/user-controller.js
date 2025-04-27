@@ -67,11 +67,12 @@ async function createUser(req, res, next) {
                 subject: "Please verify your account by using otp",
                 text: `Please find the opt, reminder don't share with anyone ${otp}`,
             })
-                .then(() => res.status(result.statuscode).json(result))
+                // .then(() => )
                 .catch((err) => {
                 next(err);
             });
         }
+        res.status(result.statuscode).json(result);
     }
     catch (error) {
         next(error);
@@ -94,11 +95,18 @@ async function login(req, res, next) {
                 userId: new mongoose_1.default.Types.ObjectId(find_user._id),
             },
         });
+        const user = {
+            email: find_user?.email ?? "",
+            user_type: find_user?.user_type ?? "",
+            userId: find_user?._id ?? "",
+            user_name: find_user?.user_name ?? "",
+            profile: find_user.profile ?? "",
+        };
         const responses = {
             message: `Welcome ${find_user.user_name ?? ""}`,
             statuscode: 200,
             success: true,
-            responses: find_user,
+            responses: user,
         };
         // Store token in HTTP-Only cookie
         res.cookie("authToken", token, {
