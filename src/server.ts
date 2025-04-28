@@ -15,8 +15,8 @@ const app = express();
 
 // cors
 const allowedOrigins = [
+  "http://localhost:3000",
   "https://travel-booking-client-4r4p.vercel.app",
-  "http://localhost:8000",
 ];
 app.use(
   cors({
