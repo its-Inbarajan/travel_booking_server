@@ -15,8 +15,7 @@ const app = express();
 
 // cors
 const allowedOrigins = [
-  "travel-booking-client-4r4p.vercel.app",
-  "travel-booking-client-4r4p-git-develop-inbarajans-projects.vercel.app",
+  "https://travel-booking-client-4r4p.vercel.app",
   "http://localhost:8000",
 ];
 app.use(
@@ -29,6 +28,7 @@ app.use(
         callback(new Error("CORS not allowed"));
       }
     },
+    allowedHeaders: "Content-Type,Authorization",
     credentials: true,
   })
 );
