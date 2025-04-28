@@ -20,6 +20,7 @@ app.use(
   cors({
     origin: [
       "https://travel-booking-client-7csu.vercel.app",
+      "travel-booking-client-4r4p-git-develop-inbarajans-projects.vercel.app",
       "http://localhost:8000",
     ],
     methods: ["POST", "GET", "PUT", "DELETE"],
