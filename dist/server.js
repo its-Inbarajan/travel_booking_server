@@ -16,14 +16,26 @@ const global_error_1 = require("./middleware/global-error");
 // Config
 dotenv_1.default.config();
 const app = (0, express_1.default)();
-app.use(express_1.default.json());
-app.use((0, cookie_parser_1.default)());
 // cors
+const allowedOrigins = [
+    "http://localhost:3000",
+    "https://travel-booking-client-4r4p.vercel.app",
+];
 app.use((0, cors_1.default)({
-    origin: "http://localhost:8000",
     methods: ["POST", "GET", "PUT", "DELETE"],
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        }
+        else {
+            callback(new Error("CORS not allowed"));
+        }
+    },
+    allowedHeaders: "Content-Type,Authorization",
     credentials: true,
 }));
+app.use(express_1.default.json());
+app.use((0, cookie_parser_1.default)());
 // app.use("/api", (req: Request, res: Response) => {
 //   res.send("Welcome developer! your server is Perfectly running.");
 // });
