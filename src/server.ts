@@ -12,21 +12,29 @@ import { GlobalError } from "./middleware/global-error";
 // Config
 dot.config();
 const app = express();
-app.use(express.json());
-app.use(cookieparser());
 
 // cors
+const allowedOrigins = [
+  "travel-booking-client-4r4p.vercel.app",
+  "travel-booking-client-4r4p-git-develop-inbarajans-projects.vercel.app",
+  "http://localhost:8000",
+];
 app.use(
   cors({
-    origin: [
-      "https://travel-booking-client-7csu.vercel.app",
-      "travel-booking-client-4r4p-git-develop-inbarajans-projects.vercel.app",
-      "http://localhost:8000",
-    ],
     methods: ["POST", "GET", "PUT", "DELETE"],
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("CORS not allowed"));
+      }
+    },
     credentials: true,
   })
 );
+
+app.use(express.json());
+app.use(cookieparser());
 
 // app.use("/api", (req: Request, res: Response) => {
 //   res.send("Welcome developer! your server is Perfectly running.");
