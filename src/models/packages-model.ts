@@ -33,13 +33,13 @@ const packageSchema = new Schema<IPackages>(
     },
     posted_by: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "users",
+      ref: "user",
       required: [true, "Creator id missing."],
     },
     booking_ids: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "users",
+        ref: "user",
       },
     ],
   },
